@@ -11,6 +11,7 @@
    This trueCallerTerminal would be an alias for Linux users to identify the person using TrueCaller
    service by just typing the phone number on the terminal.
 */
+    include_once 'simple_html_dom.php';
 
     function constructRequest($phoneNumber) {
 
@@ -37,6 +38,18 @@
         return $result;
     }
 
+    function getTextBetweenTags($string, $tagname) {
+        // Create DOM from string
+        $html = str_get_html($string);
+
+        $titles = array();
+        // Find all tags
+        foreach($html->find($tagname) as $element) {
+            $titles[] = $element->plaintext;
+        }
+    }
+
+    getTextBetweenTags(sendRequest('9772536250'),'h1');
 
 
 
